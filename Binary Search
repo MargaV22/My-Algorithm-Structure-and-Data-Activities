@@ -1,53 +1,67 @@
 import java.util.Scanner;
 import java.util.Arrays;
 
-public class BinarySearchUserInput {
+public class BinarySearchExample {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scan = new Scanner(System.in);
 
-        // Ask the user for the size of the array
-        System.out.print("Enter the number of elements in the array: ");
-        int box = scanner.nextInt();
+        // As you can see , I input the size of the array
+        System.out.print("Enter the number of elements: ");
+        int num = scan.nextInt();
 
-        // Create an array of the specified size
-        int[] num = new int[box];
+        // As you can see, I declare an array of size num
+        int[] arr = new int[num];
 
-        // Ask the user to input the elements of the array (must be sorted for binary search)
-        System.out.println("Enter the elements of the array in order:");
-        for (int s = 0; s < box; s++) {
-            System.out.print("Element " + (s+1) + ": ");
-            num[s] = scanner.nextInt();
+        // As you can, I input the elements of the array
+        System.out.println("Enter " + num + " sorted integers:");
+        for (int i = 0; i < num; i++) {
+            System.out.print("integer" + i + (":"));
+            arr[i] = scan.nextInt();
+            
         }
 
-        // Ask the user for the target value
-        System.out.print("Enter the value to search for: ");
-        int select = scanner.nextInt();
+        // As you can see, I input the element to search for
+        System.out.print("Enter the element to search: ");
+        int sorted = scan.nextInt();
 
-        // Binary search variables
+        // As you can see, I perform binary search with this cide right here
+        int output = binarySearch(arr, sorted);
+
+        // As you can see, I display the result in this following code(the println)
+        if (output == -1) {
+            System.out.println("Element not found.");
+        } else {
+            System.out.println("Element found at index: " + output);
+        }
+
+        go.close();
+    }
+
+    // As you can see, This is the binary search function
+    public static int binarySearch(int[] arr, int key) {
         int low = 0;
-        int high = num.length - 1;
-        boolean found = false;
+        int high = arr.length - 1;
 
-        // Binary search using a loop
         while (low <= high) {
-            int mid = (low + high) / 2;
+            int mid = low + (high - low) / 2;
 
-            if (num[mid] == select) {
-                System.out.println("Target " + select + " found at index " + mid);
-                found = true;
-                break;
-            } else if (num[mid] < select) {
-                low = mid + 1; // Search the right half
-            } else {
-                high = mid - 1; // Search the left half
+            // As you can see, Check if the key is present at mid
+            if (arr[mid] == key) {
+                return mid;
+            }
+
+            // As you can see, If key is greater, Then ignore the left half
+            if (arr[mid] < key) {
+                low = mid + 1;
+            }
+            // As you can see, If key is smaller,  Then ignore the right half
+            else {
+                high = mid - 1;
             }
         }
 
-        // If the target was not found
-        if (!found) {
-            System.out.println("Target " + select + " not found in the array.");
-        }
-
-        scanner.close();
+        // As you can see, When key is not present in the array then use the (return -1)
+        return -1;
     }
-
+}
